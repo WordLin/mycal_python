@@ -1,0 +1,91 @@
+### FastAPI 待办事项 API 测试
+
+### 1. 获取根路径
+GET http://localhost:8000/
+Accept: application/json
+
+### 2. 创建任务
+POST http://localhost:8000/api/v1/todos
+Content-Type: application/json
+
+{
+  "title": "编写项目文档",
+  "start_time": "2024-01-15T10:00:00",
+  "duration_hours": 2.0,
+  "due_date": "2024-01-15T14:00:00",
+  "priority": 2,
+  "depends_on": [],
+  "final_deadline": null
+}
+
+### 3. 创建另一个任务
+POST http://localhost:8000/api/v1/todos
+Content-Type: application/json
+
+{
+  "title": "团队会议",
+  "start_time": "2024-01-15T13:00:00",
+  "duration_hours": 1.0,
+  "due_date": "2024-01-15T15:00:00",
+  "priority": 1,
+  "depends_on": [],
+  "final_deadline": null
+}
+
+### 4. 获取所有任务
+GET http://localhost:8000/api/v1/todos
+Accept: application/json
+
+### 5. 获取指定任务
+GET http://localhost:8000/api/v1/todos/1
+Accept: application/json
+
+### 6. 获取指定日期的任务
+GET http://localhost:8000/api/v1/todos/date/2024-01-15
+Accept: application/json
+
+### 7. 获取未来7天的日程安排
+GET http://localhost:8000/api/v1/todos/schedule/days?days=7
+Accept: application/json
+
+### 8. 完成任务
+POST http://localhost:8000/api/v1/todos/1/complete
+Accept: application/json
+
+### 9. 更新任务
+PUT http://localhost:8000/api/v1/todos/2
+Content-Type: application/json
+
+{
+  "title": "团队会议（已更新）",
+  "priority": 1
+}
+
+### 10. 自动重新调度
+POST http://localhost:8000/api/v1/todos/reschedule
+Content-Type: application/json
+
+{
+  "current_time": "2024-01-15T18:00:00"
+}
+
+### 11. 获取日历配置
+GET http://localhost:8000/api/v1/todos/calendar/config
+Accept: application/json
+
+### 12. 更新日历配置
+PUT http://localhost:8000/api/v1/todos/calendar/config
+Content-Type: application/json
+
+{
+  "work_days": [0, 1, 2, 3, 4],
+  "work_start_hour": 9,
+  "work_end_hour": 18,
+  "holidays": ["2024-01-01", "2024-02-10"],
+  "special_workdays": ["2024-01-28"]
+}
+
+### 13. 删除任务
+DELETE http://localhost:8000/api/v1/todos/1
+Accept: application/json
+
